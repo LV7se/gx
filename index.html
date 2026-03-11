@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>广西商贸技师学院 - 模仿Apple官网设计</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff; color: #1d1d1f; line-height: 1.47059; font-weight: 400;
+            letter-spacing: -0.022em; scroll-behavior: smooth;
+        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .navbar {
+            position: sticky; top: 0; z-index: 100;
+            background-color: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .nav-container { display: flex; align-items: center; justify-content: flex-start; max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 60px; }
+        .logo a { font-size: 1.5rem; font-weight: 600; text-decoration: none; color: #1d1d1f; letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #1d1d1f 0%, #4a4a4e 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-icons { display: none; }
+        .hero {
+            background-color: #000; background-image: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 30%),
+                              linear-gradient(145deg, #1a1a1e 0%, #0b0b0f 100%); color: #fff; padding: 80px 0 100px;
+            margin-bottom: 60px; position: relative; overflow: hidden;
+        }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to top, #ffffff, transparent); pointer-events: none; }
+        .hero-content { max-width: 900px; margin: 0 auto; text-align: center; padding: 60px 24px 20px; }
+        .hero-subtitle { font-size: 1.4rem; font-weight: 500; margin-bottom: 10px; color: #a1a1a6; letter-spacing: 0.02em; }
+        .hero-title { font-size: clamp(3rem, 10vw, 5.5rem); font-weight: 700; line-height: 1.05; margin-bottom: 20px;
+            background: linear-gradient(150deg, #ffffff, #b3b3b7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-description { font-size: 1.8rem; font-weight: 400; margin-bottom: 30px; color: #86868b; }
+        .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary {
+            display: inline-block; padding: 12px 40px; border-radius: 980px; font-size: 1.1rem; font-weight: 500;
+            text-decoration: none; transition: all 0.2s ease; cursor: pointer;
+        }
+        .btn-primary { background-color: #0071e3; color: #fff; border: none; }
+        .btn-primary:hover { background-color: #0077ed; transform: scale(1.02); }
+        .btn-secondary { background-color: transparent; color: #2997ff; border: 1px solid #2997ff; }
+        .btn-secondary:hover { background-color: rgba(41, 151, 255, 0.1); transform: scale(1.02); }
+        .section-title { font-size: 2.5rem; font-weight: 700; letter-spacing: -0.003em; margin-bottom: 20px; text-align: center; }
+        .section-subtitle { font-size: 1.3rem; color: #6e6e73; text-align: center; margin-bottom: 60px; font-weight: 400; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 80px; }
+        .card {
+            background-color: #f5f5f7; border-radius: 24px; padding: 40px 24px 32px; transition: all 0.3s ease;
+            text-align: center; border: 1px solid transparent; cursor: pointer;
+        }
+        .card:hover { background-color: #fff; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); transform: translateY(-6px); border-color: #f0f0f2; }
+        .card-icon { font-size: 3.2rem; color: #0071e3; margin-bottom: 20px; }
+        .card h3 { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
+        .card p { color: #6e6e73; margin-bottom: 30px; font-size: 1rem; line-height: 1.5; }
+        .card-link { text-decoration: none; color: #0071e3; font-weight: 500; display: inline-flex; align-items: center; gap: 5px; }
+        .card-link i { font-size: 0.9rem; transition: transform 0.2s; }
+        .card-link:hover i { transform: translateX(4px); }
+        .news-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-bottom: 80px; }
+        @media (max-width: 1024px) { .news-grid { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .news-grid { grid-template-columns: 1fr; } .grid-3 { grid-template-columns: 1fr; } }
+        .news-card {
+            background-color: #fff; border-radius: 20px; overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.02); border: 1px solid #f0f0f2; transition: all 0.2s ease;
+        }
+        .news-card:hover { box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04); transform: scale(1.01); }
+        .news-image {
+            height: 200px; background-size: cover; background-position: center; background-repeat: no-repeat;
+            display: flex; align-items: center; justify-content: center; color: #8e8e93; font-size: 3rem;
+        }
+        .news-content { padding: 28px 20px 24px; }
+        .news-date { color: #8e8e93; font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; }
+        .news-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+        .news-excerpt { color: #6e6e73; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; }
+        .news-link { text-decoration: none; color: #0071e3; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+        .footer {
+            background-color: #f5f5f7; color: #6e6e73; padding: 50px 0 30px; margin-top: 80px; border-top: 1px solid #d2d2d7;
+        }
+        .footer-content {
+            max-width: 1280px; margin: 0 auto; padding: 0 24px;
+            display: grid; grid-template-columns: 2fr 1.5fr; gap: 40px;
+        }
+        .footer-col h4 {
+            color: #1d1d1f; font-weight: 600; margin-bottom: 12px; font-size: 1rem;
+        }
+        .footer-col p {
+            margin-bottom: 8px;
+        }
+        .social-icons {
+            margin: 12px 0 20px 0;
+        }
+        .social-icons a {
+            font-size: 1.8rem;
+            color: #6e6e73;
+            text-decoration: none;
+        }
+        .social-icons a:hover {
+            color: #0071e3;
+        }
+        .qr-container {
+            display: flex;
+            justify-content: flex-start;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .qr-item {
+            text-align: center;
+            width: 100px;
+        }
+        .qr-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 1px solid #d2d2d7;
+            margin-bottom: 6px;
+            object-fit: contain;
+        }
+        .qr-item p {
+            font-size: 0.9rem;
+            color: #515154;
+            margin: 0;
+        }
+        .copyright {
+            text-align: center; padding-top: 40px; font-size: 0.85rem; color: #8e8e93;
+            border-top: 1px solid #d2d2d7; max-width: 1280px; margin: 40px auto 0; padding-left: 24px; padding-right: 24px;
+        }
+        @media (max-width: 1024px) {
+            .grid-3, .news-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: 1fr; gap: 30px; }
+            .qr-container { gap: 40px; }
+        }
+        @media (max-width: 640px) {
+            .grid-3, .news-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 3.2rem; }
+            .hero-description { font-size: 1.3rem; }
+            .section-title { font-size: 2rem; }
+            .qr-container { flex-direction: column; align-items: flex-start; gap: 30px; }
+        }
+        .fake-img-icon { font-size: 3rem; color: #ffffff80; }
+        .stat-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 18px;
+            border-radius: 40px;
+            color: #fff;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 0.5px solid rgba(255,255,255,0.3);
+        }
+        #hot-majors { scroll-margin-top: 80px; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <nav class="nav-container">
+            <div class="logo"><a href="#">广西商贸技师学院</a></div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="stat-badge">国家级重点技工院校 · 广西示范</div>
+                <div class="hero-subtitle">广西商贸技师学院</div>
+                <h1 class="hero-title">明德强技 · 行知合一</h1>
+                <div class="hero-description">培养商贸精英，锻造技师之才</div>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">报读指南 <i class="fas fa-arrow-right" style="margin-left: 6px;"></i></a>
+                    <a href="#hot-majors" class="btn-secondary">专业介绍 <i class="fas fa-chevron-right" style="margin-left: 4px; font-size: 0.8rem;"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <h2 class="section-title">校园动态</h2>
+            <p class="section-subtitle">最新资讯 · 精彩校园</p>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://www.gxsmjx.com/upload/images/2026/3/3d7d09cee6bf29b4.jpg');"></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> 2026.03.09</div>
+                        <h3 class="news-title">国旗下的讲话 我院举行2026学年春季学期第二周升国旗仪式</h3>
+                        <p class="news-excerpt">全院师生庄严升旗，聆听国旗下的讲话，弘扬爱国主义精神，开启新学期新征程。</p>
+                        <a href="https://www.gxsmjx.com/article/Ideological-2026030957255.html" class="news-link" target="_blank">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://www.gxsmjx.com/upload/images/2026/3/9791bf13d0893083.jpg');"></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> 2026.03.08</div>
+                        <h3 class="news-title">【把好安全关口，护航崭新学期 】学院领导带队开展开学前校园安全大检查</h3>
+                        <p class="news-excerpt">领导深入两校区重点区域排查隐患，确保新学期校园安全稳定。</p>
+                        <a href="https://www.gxsmjx.com/article/Security-2026030857254.html" class="news-link" target="_blank">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://www.gxsmjx.com/upload/images/2026/3/768370af9ea8d3fb.jpeg');"></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> 2026.03.06</div>
+                        <h3 class="news-title">中国共产党广西商贸技师学院党员大会胜利召开</h3>
+                        <p class="news-excerpt">全体党员代表参会，总结过去工作，部署未来发展目标，推动学院高质量发展。</p>
+                        <a href="https://www.gxsmjx.com/article/CPC-2026030657253.html" class="news-link" target="_blank">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image" style="background-image: url('https://www.gxsmjx.com/upload/images/2026/3/a4983ff8feeab7ca.jpeg');"></div>
+                    <div class="news-content">
+                        <div class="news-date"><i class="far fa-calendar-alt" style="margin-right: 4px;"></i> 2026.03.05</div>
+                        <h3 class="news-title">我院召开2026年春季学期工作会议</h3>
+                        <p class="news-excerpt">会议全面总结上学期工作，部署新学期重点任务，全体中层以上干部参加，共谋学院高质量发展新路径。</p>
+                        <a href="https://www.gxsmjx.com/article/Meeting-2026030557251.html" class="news-link" target="_blank">阅读更多 <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" id="hot-majors">热门专业</h2>
+            <p class="section-subtitle">对接产业需求，打造一流技师专业群</p>
+            <div class="grid-3">
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-201107123043.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>计算机网络应用</h3>
+                    <p>网络搭建、运维、安全防护、云计算，培养网络工程师与运维专家。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-201107123043.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-201704183044.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>电子商务</h3>
+                    <p>网店运营、直播电商、新媒体营销，培养数字商业新人才。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-201704183044.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-201107123040.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-truck"></i></div>
+                    <h3>现代物流</h3>
+                    <p>智慧仓储、供应链管理、国际货代，企业金牌物流师基地。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-201107123040.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-202211025602.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>烹饪（中式烹调）</h3>
+                    <p>桂菜传承、中西面点、营养搭配，培养星级酒店主厨。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-202211025602.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-201804143047.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-car-battery"></i></div>
+                    <h3>新能源汽车检测与维修</h3>
+                    <p>检测维修、电池管理、智能诊断，紧贴行业前沿。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-201804143047.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card" onclick="window.open('https://www.gxsmjx.com/article/Professional-201505203049.html', '_blank')">
+                    <div class="card-icon"><i class="fas fa-child"></i></div>
+                    <h3>幼儿教育</h3>
+                    <p>蒙台梭利、艺术启蒙、保育保健，优质幼师摇篮。</p>
+                    <a href="https://www.gxsmjx.com/article/Professional-201505203049.html" class="card-link" target="_blank">查看专业 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(145deg, #f0f0f2, #fafafc); border-radius: 32px; padding: 60px 40px; margin: 60px 0; text-align: center;">
+                <h2 style="font-size: 2.8rem; font-weight: 700; margin-bottom: 15px;">2026年秋季招生已启动</h2>
+                <p style="font-size: 1.5rem; color: #515157; margin-bottom: 30px;">初中/高中毕业生，享受免学费及助学金政策</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://sign.gxsmjx.com/phone/?openid=oIWhp1qb_asU7OZN3ygj_Nbmts1I&paras=" class="btn-primary" style="font-size: 1.2rem; padding: 14px 50px;" target="_blank">立即报名 <i class="fas fa-pen"></i></a>
+                    <a href="https://mp.weixin.qq.com/s/mILH8HxKLe9epj2JvQZKng" class="btn-secondary" style="font-size: 1.2rem; padding: 14px 50px;" target="_blank">简章预览 <i class="fas fa-eye"></i></a>
+                </div>
+                <p style="margin-top: 30px; color: #86868b;">* 具体政策以招生办公布为准，咨询电话: 0771-1234567</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>广西商贸技师学院</h4>
+                <p>德技双馨 敬业乐群</p>
+                <p><i class="fas fa-map-pin" style="margin-right: 8px;"></i> 明阳校区：南宁市江南区明阳大道13号</p>
+                <p><i class="fas fa-map-pin" style="margin-right: 8px;"></i> 大岭校区：南宁市大学大岭路73号</p>
+                <p><i class="fas fa-phone-alt"></i> 0771-1234567</p>
+                <p><i class="fas fa-envelope"></i> gxsmjsxy@edu.cn</p>
+            </div>
+            <div class="footer-col">
+                <h4>关注我们</h4>
+                <div class="social-icons">
+                    <a href="https://www.douyin.com/user/MS4wLjABAAAAaxhvfV0elkV8rAWWZ1ncMex9Ph9g65zQqOIqqec7G4I" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+                <div class="qr-container">
+                    <div class="qr-item">
+                        <img src="https://www.gxsmjx.cn/images/wechatd.jpg" alt="微信公众号二维码">
+                        <p>微信公众号</p>
+                    </div>
+                    <div class="qr-item">
+                        <img src="https://www.gxsmjx.cn/images/wechatf.jpg" alt="微信服务号二维码">
+                        <p>微信服务号</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            Copyright © 2026 广西商贸技师学院 版权所有 | 桂ICP备050xxxxx号
+        </div>
+    </footer>
+</body>
+</html>
